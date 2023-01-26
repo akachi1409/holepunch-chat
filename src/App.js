@@ -110,7 +110,7 @@ function App() {
 
         <Row>
           <Col lg={9}>
-            <Form.Control type="text" placeholder="sample message" value={msg} onChange={(e)=>setMsg(e.target.value)} />
+            <Form.Control type="text" placeholder="sample message" value={msg} onChange={(e) => setMsg(e.target.value)} />
           </Col>
 
           <Col lg={3}>
