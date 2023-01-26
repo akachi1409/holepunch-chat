@@ -32,6 +32,9 @@ swarm.join(topic);
 
 function App() {
   const [msg, setMsg] = useState("");
+  const handlePushMsg = () => {
+
+  }
   return (
     <div className="App">
       <Container>
@@ -49,10 +52,10 @@ function App() {
         </Row>
         <Row>
           <Col lg = {9}>
-              <Form.Control type="text" placeholder="name@example.com" value={msg} onChange={(e)=>setMsg(e.target.value)} />
+              <Form.Control type="text" placeholder="sample message" value={msg} onChange={(e)=>setMsg(e.target.value)} />
             </Col>
             <Col lg = {3}>
-              <Button variant="primary">Send</Button>
+              <Button variant="primary" onClick={()=> handlePushMsg()}>Send</Button>
             </Col>
         </Row>
       </Container>
