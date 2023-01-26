@@ -28,7 +28,7 @@ function App() {
 
   const [status, setStatus] = useState("");
   const [msg, setMsg] = useState("");
-  const [history, setHistory] = useState(["Start of message"])
+  const [history, setHistory] = useState([])
 
   useEffect(() => {
     if (!swarm) return;
