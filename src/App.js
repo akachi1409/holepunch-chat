@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 import React, {useState} from "react"
 import "./App.css";
 import b4a from "b4a";
@@ -32,24 +33,23 @@ swarm.join(topic);
 
 function App() {
   const [msg, setMsg] = useState("");
+  const [history, setHistory] = useState(["Start of message"])
   const handlePushMsg = () => {
-
+    var temp = [...history];
+    temp.push(msg);
+    setHistory(temp)
+    setMsg("");
   }
   return (
     <div className="App">
       <Container>
-        <Row>
-          <Form>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Chat history</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
-            
-          </Form>
-        </Row>
+        <ListGroup variant="flush">
+        {
+          history.map((item, index)=>(
+            <ListGroup.Item key={index}>{item}</ListGroup.Item>
+          ))
+        }
+        </ListGroup>
         <Row>
           <Col lg = {9}>
               <Form.Control type="text" placeholder="sample message" value={msg} onChange={(e)=>setMsg(e.target.value)} />
