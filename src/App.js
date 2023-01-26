@@ -9,10 +9,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 
-import DHT from '@hyperswarm/dht-relay'
-import Stream from '@hyperswarm/dht-relay/ws'
-import Hyperswarm from 'hyperswarm'
-
 import useDHT from './hooks/dht.js';
 import useSwarm from './hooks/swarm.js';
 import b4a from 'b4a';
