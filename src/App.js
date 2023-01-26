@@ -84,6 +84,8 @@ function App() {
               <Button variant="primary" onClick={()=> handlePushMsg()}>Send</Button>
             </Col>
         </Row>
+        <br/><br/>
+        <p> Message History </p>
         <ListGroup variant="flush">
         {
           history.map((item, index)=>(
