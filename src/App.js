@@ -16,6 +16,7 @@ const dht = new DHT(new Stream(true, ws));
 const swarm = new Hyperswarm({ dht });
 
 function App() {
+  const [statusMsg, setStatusMsg] = useState("");
   const [msg, setMsg] = useState("");
   const [history, setHistory] = useState(["Start of message"])
 
@@ -29,7 +30,7 @@ function App() {
 
     function onsocket (socket, info) {
       console.log('new peer connected')
-
+      
       socket.on('error', (err) => console.error('socket error', err.code))
       socket.on('close', () => console.log('peer disconnected'))
 
@@ -45,18 +46,17 @@ function App() {
     }
   }, [])
 
-  console.log('new app render')
+  console.log('new app render', history.length)
 
   const addToHistory = (message) => {
-    const temp = [...history];
-    temp.push(message);
-    setHistory(temp)
+    setHistory((history) => [...history,message])
   }
 
   const handlePushMsg = () => {
     if (!msg) return
 
     if (swarm.connections.size === 0) {
+      setStatusMsg("No peers yet")
       setMsg("");
       return
     }
@@ -75,13 +75,7 @@ function App() {
   return (
     <div className="App">
       <Container>
-        <ListGroup variant="flush">
-        {
-          history.map((item, index)=>(
-            <ListGroup.Item key={index}>{item}</ListGroup.Item>
-          ))
-        }
-        </ListGroup>
+        <p>{statusMsg}</p>
         <Row>
           <Col lg = {9}>
               <Form.Control type="text" placeholder="sample message" value={msg} onChange={(e)=>setMsg(e.target.value)} />
@@ -90,6 +84,13 @@ function App() {
               <Button variant="primary" onClick={()=> handlePushMsg()}>Send</Button>
             </Col>
         </Row>
+        <ListGroup variant="flush">
+        {
+          history.map((item, index)=>(
+            <ListGroup.Item key={index}>{item}</ListGroup.Item>
+          ))
+        }
+        </ListGroup>
       </Container>
     </div>
   );
