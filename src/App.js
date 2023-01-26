@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import React, { useState, useEffect } from "react"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 import b4a from "b4a";
 import DHT from "@hyperswarm/dht-relay";
@@ -30,7 +32,14 @@ function App() {
 
     function onsocket (socket, info) {
       console.log('new peer connected')
-      
+      toast.success("✔️ New peer connected !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+      });
       socket.on('error', (err) => console.error('socket error', err.code))
       socket.on('close', () => console.log('peer disconnected'))
 
@@ -94,6 +103,7 @@ function App() {
         }
         </ListGroup>
       </Container>
+      <ToastContainer />
     </div>
   );
 }
