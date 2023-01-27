@@ -7,7 +7,7 @@ export default function useDHT (dht) {
   useEffect(() => {
     if (!dht) return
 
-    const swarm = new Hyperswarm({ dht })
+    const swarm = new Hyperswarm({ dht, keyPair: dht.defaultKeyPair })
 
     setSwarm(swarm)
 
