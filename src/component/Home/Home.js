@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 // import { setUserName } from "../../store/userProfile";
 
 function Home() {
-//   const dispatch = useDispatch();
+  //   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
-  
+
   const handleNavigate = () => {
     window.localStorage.setItem("username", username);
     // dispatch(setUserName(username));
@@ -24,8 +24,12 @@ function Home() {
           <h1>Welcome</h1>
         </Row>
         <Row>
-          <Col lg={8}>
+          <Col lg={4}>
+            <label>Type username</label>
+          </Col>
+          <Col lg={4}>
             <input
+              placeholder="James"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
