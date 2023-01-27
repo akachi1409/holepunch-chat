@@ -28,7 +28,9 @@ function Chat() {
   const [status, setStatus] = useState("");
   const [msg, setMsg] = useState("");
   const [history, setHistory] = useState([]);
-
+  const username = window.localStorage.getItem("username")
+    ? window.localStorage.getItem("username")
+    : "Guest";
   useEffect(() => {
     if (!swarm) return;
     console.log("new swarm");
@@ -81,7 +83,7 @@ function Chat() {
   console.log("new app render", history.length);
 
   const addToHistory = ({ from, message }) => {
-    message = shortPublicKey(from.remotePublicKey) + ": " + message;
+    // message = shortPublicKey(from.remotePublicKey) + ": " + message;
     setHistory((history) => [...history, message]);
     return message;
   };
@@ -98,10 +100,10 @@ function Chat() {
     }
 
     const self = { remotePublicKey: swarm.keyPair.publicKey };
-    addToHistory({ from: self, message: msg });
+    addToHistory({ from: self, message: username + ": " + msg });
 
     for (const socket of swarm.connections) {
-      socket.write(msg);
+      socket.write(username + ": " + msg);
     }
 
     setMsg("");
@@ -110,6 +112,7 @@ function Chat() {
   return (
     <div className="App">
       <Container>
+        <h2>Welcome {username}!</h2>
         <p>{status}</p>
 
         <Row>
